@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyTorch
+*.pth
+*.pt
+*.ckpt
+
+# Data files (uncomment if you don't want to commit data)
+# data/
+# *.npz
+# *.h5
+# *.hdf5
+
+# Outputs
+outputs/
+logs/
+wandb/
+tensorboard/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MuJoCo
+.mujoco/
+
+# Checkpoints (optional - uncomment if you don't want to commit checkpoints)
+# checkpoints/
+# *.pth.tar
+

@@ -1,0 +1,68 @@
+<mujoco model="panda scene">
+  <include file="panda.xml"/>
+
+  <option gravity="0 0 -9.81"/>
+
+  <statistic center="0.3 0 0.4" extent="1"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+      markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+    
+    <!-- Overhead camera - positioned above scene center, looking straight down -->
+    <!-- euler="90 0 0" rotates 90 degrees around X axis to look straight down -->
+    <camera name="overhead" pos="1.1 0 0.9" euler="0 45 0" fovy="100"/>
+    
+    <!-- Visual marker for camera position -->
+    <body name="camera_marker" pos="1.1 0 0.9">
+      <geom name="camera_marker_geom" type="box" size="0.05 0.05 0.05" rgba="1 1 0 0.8" contype="0" conaffinity="0"/>
+    </body>
+    
+    <!-- Table near the robot -->
+    <!-- Table top is at z=0.4, thickness 0.02, so top surface is at z=0.42 -->
+    <!-- Increased length/width: size="0.4 0.55 0.02" => 0.8m x 1.1m (shorter side increased by 0.2) -->
+    <!-- Rotate table 90 degrees about z (1.5708 rad) while keeping robot base as-is -->
+    <body name="table" pos="0.5 0 0.4" euler="0 0 1.5708">
+      <geom name="table_top" type="box" size="0.4 0.55 0.02" rgba="0.6 0.4 0.2 1"/>
+      <geom name="table_leg1" type="box" size="0.02 0.02 0.2" pos="-0.38 -0.53 -0.22" rgba="0.4 0.3 0.2 1"/>
+      <geom name="table_leg2" type="box" size="0.02 0.02 0.2" pos="0.38 -0.53 -0.22" rgba="0.4 0.3 0.2 1"/>
+      <geom name="table_leg3" type="box" size="0.02 0.02 0.2" pos="-0.38 0.53 -0.22" rgba="0.4 0.3 0.2 1"/>
+      <geom name="table_leg4" type="box" size="0.02 0.02 0.2" pos="0.38 0.53 -0.22" rgba="0.4 0.3 0.2 1"/>
+    </body>
+    
+    <!-- Pick-and-place cube (red) - centered on table top -->
+    <!-- Table top z ≈ 0.42, cube half-size = 0.03 => cube center at z = 0.45 -->
+    <body name="cube_pick" pos="0.7 -0.1 0.45">
+      <freejoint/>
+      <geom name="cube_pick_geom" type="box" size="0.03 0.03 0.03"
+            rgba="1 0 0 1" mass="0.1"/>
+    </body>
+
+    <!-- Stacking cube A (blue) - also on top, slightly offset along long axis -->
+    <!-- Still centered in width (y=0), x inside table range; z = 0.45 on table -->
+    <body name="cube_A" pos="0.7 0.1 0.45">
+      <freejoint/>
+      <geom name="cube_A_geom" type="box" size="0.03 0.03 0.03"
+            rgba="0 0 1 1" mass="0.1"/>
+    </body>
+
+    <!-- Target bowl / region for pick-and-place -->
+    <!-- <body name="target_bowl" pos="0.6 0.0 0.42">
+      <geom name="target_geom" type="cylinder" size="0.05 0.01"
+            rgba="1 1 0 0.5" contype="0" conaffinity="0"/>
+    </body> -->
+  </worldbody>
+</mujoco>

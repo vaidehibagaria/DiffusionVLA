@@ -1,0 +1,77 @@
+# Requirements for Franka Arm Image-based Training and Testing
+# Install with: pip install -r requirements.txt
+#
+# This file contains all dependencies needed for:
+# - collect_trajectories_image.py (data collection)
+# - train_franka_arm_image.py (training)
+# - franka_test_image.py (testing)
+
+# ============================================
+# Core Dependencies (Required)
+# ============================================
+
+# PyTorch and computer vision
+torch>=1.12.0
+torchvision>=0.13.0
+
+# Diffusion models (for DDPMScheduler)
+diffusers>=0.11.0
+
+# Text embeddings (CLIP and SigLIP support)
+# CLIP is default, SigLIP is optional (same package)
+open-clip-torch>=2.0.0
+
+# MuJoCo physics simulator
+# Note: MuJoCo 3.x uses the 'mujoco' package (not mujoco-py)
+mujoco>=3.0.0
+
+# Tensor operations
+einops>=0.4.0
+
+# Data handling
+numpy>=1.21.0
+
+# Progress bars (used in dataset loading)
+tqdm>=4.64.0
+
+# Common Python utilities
+decorator>=5.0.0
+
+# ============================================
+# Local Package Dependencies
+# ============================================
+# The following are part of the diffusion_policy package itself.
+# Make sure the diffusion_policy package is in your PYTHONPATH or installed:
+# - diffusion_policy (local package)
+# - diffusion_policy_test (local package)
+#
+# To install locally:
+#   pip install -e .
+# Or ensure the project root is in PYTHONPATH:
+#   export PYTHONPATH="${PYTHONPATH}:/path/to/diffusion_policy"
+
+# ============================================
+# Optional Dependencies
+# ============================================
+# These may be used by other parts of the codebase but not strictly required
+# for the three main files:
+#
+# zarr>=2.12.0          # For zarr-based datasets (not used in .npz loading)
+# numcodecs>=0.10.2     # For zarr compression (not used in .npz loading)
+# scipy>=1.9.0          # Used in some utility functions
+# opencv-python>=4.6.0  # Used in image processing utilities
+
+# ============================================
+# GPU Support (Optional but Recommended)
+# ============================================
+# For GPU training, ensure you have:
+# - CUDA toolkit (matching your PyTorch version)
+# - cuDNN (for GPU acceleration)
+# 
+# PyTorch with CUDA can be installed via:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+# (Adjust CUDA version as needed)
+#
+# For MuJoCo GPU rendering (optional):
+#   pip install mujoco[egl]  # For headless GPU rendering
+
