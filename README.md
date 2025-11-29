@@ -88,7 +88,9 @@ clip_pretrained: str = "webli"
 
 ## Example Results
 
-[Add your results video here]
+The test video of the franka arm picking an object can be seen in test.mp4
+
+
 
 The trained model successfully:
 - Interprets natural language commands
