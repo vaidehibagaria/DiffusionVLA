@@ -1,4 +1,4 @@
-# Franka Arm Manipulation with Image Observations and Text Conditioning
+# Creating a Diffusion Based Vision Language Model
 
 This repository contains code for training and testing a diffusion policy for Franka robot arm manipulation using image observations and text commands (CLIP or SigLIP embeddings).
 
