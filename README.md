@@ -35,7 +35,7 @@ Data is automatically saved to `data/` directory at the repo root.
 ### 2. Training (`train/train.py`)
 
 Trains a diffusion transformer model that:
-- Encodes images using ResNet
+- Encodes images using ResNet/ViT
 - Encodes text using CLIP (default) or SigLIP
 - Predicts action sequences using diffusion denoising
 - Learns from demonstration trajectories
@@ -44,11 +44,6 @@ Trains a diffusion transformer model that:
 ```bash
 python train/train.py
 ```
-
-**Configuration:**
-- Default uses CLIP text encoder (`text_encoder_type="clip"`)
-- To use SigLIP, set `text_encoder_type="siglip"` in the config
-- For SigLIP, use model names like `"ViT-B-16-SigLIP"` and pretrained weights like `"webli"`
 
 ### 3. Testing (`franka_test_image.py`)
 
@@ -66,9 +61,10 @@ python franka_test_image.py --checkpoint outputs/franka_arm_image_training/check
 ## Architecture
 
 The model processes observations as follows:
-- **Token 1**: Concatenated arm joint positions (7D) + projected text embedding
+- **Token 1**: Concatenated arm joint positions (7D) 
 - **Token 2**: Image embedding from ResNet
-- Each timestep has 2 tokens: `[qpos+text, image]`
+- **Token 3**: Projected text embedding
+- Each timestep has 3 tokens: `[qpos,text, image]`
 - Transformer processes these tokens to predict action sequences
 
 ## Text Encoders
