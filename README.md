@@ -88,9 +88,7 @@ clip_pretrained: str = "webli"
 
 ## Example Results
 
-The test video of the franka arm picking an object can be seen in test.mp4
-
-![Demo](text.mp4)
+The test video of the franka arm picking an object can be seen in ![Demo](test.mp4)
 
 ![Demo](demo.jpg)
 
